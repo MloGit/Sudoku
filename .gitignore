@@ -1,0 +1,10 @@
+/notes
+cunit_test.c
+*.sh
+.vscode
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
