@@ -31,6 +31,28 @@ int vertical_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     }
     return 0;
 }
+
+/* Tests the 3x3 box which the cell (x, y) resides in */
+int box_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
+    int i, j;
+    int box_start;
+
+    box_start = (x / 3) * 3;
+
+    for(i = box_start; i < (box_start + 3); i++) {
+        for(j = box_start; j < (box_start + 3); j++) {
+            /* Ignore zero and self */
+            if((i == x && j == y) || board[i][j] == 0) {
+                j++;
+            }
+            if(board[i][j] == board[x][y]) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 void test_generate_board(void) {
     int i, j;
     int board[BOARD_SIZE][BOARD_SIZE];
@@ -44,6 +66,7 @@ void test_generate_board(void) {
             CU_ASSERT(board[i][j] <= 9);
             CU_ASSERT_FALSE(horizontal_duplicates(board, i, j));
             CU_ASSERT_FALSE(vertical_duplicates(board, i, j));
+            CU_ASSERT_FALSE(box_duplicates(board, i, j));
         }
     }
 }
