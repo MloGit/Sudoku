@@ -53,22 +53,37 @@ int box_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     return 0;
 }
 
-void test_generate_board(void) {
+int valid_board(int board[BOARD_SIZE][BOARD_SIZE]) {
     int i, j;
-    int board[BOARD_SIZE][BOARD_SIZE];
 
-    generate_board(board);
-
-    /* Tests valid numbers, and board rules */
     for(i = 0; i < 9; i++) {
         for(j = 0; j < 9; j++) {
-            CU_ASSERT(board[i][j] >= 0);
-            CU_ASSERT(board[i][j] <= 9);
+            CU_ASSERT((board[i][j] >= 0) && (board[i][j] <= 9));
+        }
+    }
+
+    if(CU_get_error() == 0) {
+        CU_FAIL("Cell(s) have invalid values");
+        return 0;
+    }
+
+    for(i = 0; i < 9; i++) {
+        for(j = 0; j < 9; j++) {
             CU_ASSERT_FALSE(horizontal_duplicates(board, i, j));
             CU_ASSERT_FALSE(vertical_duplicates(board, i, j));
             CU_ASSERT_FALSE(box_duplicates(board, i, j));
         }
     }
+
+    return 1;
+}
+
+void test_generate_board(void) {
+    int board[BOARD_SIZE][BOARD_SIZE];
+
+    generate_board(board);
+    CU_ASSERT_TRUE(valid_board(board));
+    /* Tests valid numbers, and board rules */
 }
 
 /* The main() function for setting up and running the tests.
