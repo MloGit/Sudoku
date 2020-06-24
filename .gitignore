@@ -2,6 +2,9 @@
 cunit_test.c
 *.sh
 .vscode
+# /Unity
+solutions
+sudokus
 
 # Object files
 *.o
