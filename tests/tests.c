@@ -14,7 +14,7 @@ void tearDown(void) {
 /* Tests the horizontal line (y) of the cell (x, y) */
 int horizontal_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     int i;
-   
+
     for(i = 0; i < BOARD_SIZE; i++) {
         if(board[i][y] == 0 || i == x) { /* Ignore zero and self */
             i++;
@@ -29,7 +29,7 @@ int horizontal_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
 /* Tests the vertical line (x) of the cell (x, y) */
 int vertical_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     int i;
-   
+
     for(i = 0; i < BOARD_SIZE; i++) {
         if(board[x][i] == 0 || i == y) { /* Ignore zero and self */
             i++;
@@ -91,7 +91,7 @@ void test_generate_board(void) {
     // TODO: Are my test cases too complex?
     // Yes, they are.
     int board[BOARD_SIZE][BOARD_SIZE];
-    
+
     int board_sum = 5 * 9 * 9; // 5 * 9 equals the sum of 1 through 9
 
     generate_board(board);
@@ -149,6 +149,28 @@ void test_solve_valid_board(void) {
         TEST_ASSERT(rc == 0);
 
         TEST_ASSERT_EQUAL_INT_ARRAY(solution, board, BOARD_SIZE*BOARD_SIZE);
+    }
+}
+
+// Tests solver against three invalid boards.
+// Each board has one of the following problems:
+//   * Horizontal duplicate
+//   * Vertical duplicate
+//   * 3*3 box duplicate
+void test_solve_invalid_board(void) {
+    int board[BOARD_SIZE][BOARD_SIZE];
+    char *board_names[3] =
+        {"../tests/testing_boards/invalid_s03a_1.txt",
+         "../tests/testing_boards/invalid_s03a_2.txt",
+         "../tests/testing_boards/invalid_s03a_3.txt"};
+    int i, rc;
+
+    for(i = 0; i < 3; i++) {
+        rc = read_board_file(board, board_names[i]);
+        TEST_ASSERT(rc == 0);
+
+        rc = solve_board(board);
+        TEST_ASSERT(rc != 0);
     }
 }
 
