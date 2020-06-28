@@ -10,10 +10,6 @@ void tearDown(void) {
     // clean stuff up here
 }
 
-void test_function_should_doBlahAndBlah(void) {
-    TEST_ASSERT(1 == 1);
-}
-
 /* Tests the horizontal line (y) of the cell (x, y) */
 int horizontal_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     int i;
@@ -65,12 +61,18 @@ int box_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     return 0;
 }
 
-void print_board(int board[BOARD_SIZE][BOARD_SIZE]) {
+void show_board(int board[BOARD_SIZE][BOARD_SIZE]) {
     int i, j;
     
     printf("\n");
     for(i = 0; i < 9; i++) {
+        if((i > 0) && ((i % 3) == 0)) {
+            printf("---------------------\n");
+        }
         for(j = 0; j < 9; j++) {
+            if((j > 0) && ((j % 3) == 0)) {
+                printf("| ");
+            }
             printf("%d ", board[i][j]);
         }
         printf("\n");
@@ -93,7 +95,7 @@ int valid_board(int board[BOARD_SIZE][BOARD_SIZE]) {
             TEST_ASSERT_FALSE(horizontal_duplicates(board, i, j));
             if(horizontal_duplicates(board, i, j)) {
                 printf("\nHorizontal line %d contains duplicates", i+1);
-                print_board(board);
+                show_board(board);
                 TEST_FAIL_MESSAGE("Horizontal duplicates found");
             }
             TEST_ASSERT_FALSE(vertical_duplicates(board, i, j));
@@ -116,15 +118,63 @@ void test_generate_board(void) {
     TEST_ASSERT_TRUE(valid_board(board));
 }
 
-void test_solve_board(void) {
-    TEST_ASSERT(1 == 2);
+int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
+    FILE *board_file;
+    int i, j, rc;
+
+    board_file = fopen(file_name, "r");
+    if(board_file == NULL) {
+        printf("ERROR: could not open file: %s\n", file_name);
+        return -1;
+    }
+    TEST_ASSERT_NOT_NULL_MESSAGE(board_file, "Error reading testing board");
+
+    for(i = 0; i < BOARD_SIZE; i++) {
+        for(j = 0; j < BOARD_SIZE; j++) {
+            rc = fscanf(board_file, "%d", &board[i][j]);
+            if(rc == 0) {
+                printf("File does not contain a full board\n");
+                return -1;
+            }
+        }
+    }
+
+    // show_board(board);
+    return 0;
 }
 
-// not needed when using generate_test_runner.rb
+void test_solve_valid_board(void) {
+    int board[BOARD_SIZE][BOARD_SIZE];
+    int solution[BOARD_SIZE][BOARD_SIZE];
+    char *board_names[3] =
+        {"../tests/testing_boards/s03a.txt",
+         "../tests/testing_boards/s07a.txt",
+         "../tests/testing_boards/s10a.txt"};
+    char *solution_names[3] =
+        {"../tests/testing_boards/s03a_s.txt",
+         "../tests/testing_boards/s07a_s.txt",
+         "../tests/testing_boards/s10a_s.txt"};
+    int i, rc;
+
+    for(i = 0; i < 3; i++) {
+        rc = read_board_file(board, board_names[i]);
+        TEST_ASSERT(rc == 0);
+
+        rc = solve_board(board);
+        TEST_ASSERT(rc == 0);
+
+        rc = read_board_file(solution, solution_names[i]);
+        TEST_ASSERT(rc == 0);
+
+        TEST_ASSERT_EQUAL_INT_ARRAY(solution, board, BOARD_SIZE*BOARD_SIZE);
+    }
+}
+
+
 int main(void) {
     UNITY_BEGIN();
-    RUN_TEST(test_function_should_doBlahAndBlah);
-    RUN_TEST(test_generate_board);
-    RUN_TEST(test_solve_board);
+    // RUN_TEST(test_generate_board);
+    RUN_TEST(test_solve_valid_board);
+    RUN_TEST(test_solve_invalid_board);
     return UNITY_END();
 }
