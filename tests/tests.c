@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../Unity/src/unity.h"
 #include "../src/game_logic.h"
+#include "../src/helper_functions.h"
 
 void setUp(void) {
     // set stuff up here
@@ -61,25 +62,6 @@ int box_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     return 0;
 }
 
-void show_board(int board[BOARD_SIZE][BOARD_SIZE]) {
-    int i, j;
-    
-    printf("\n");
-    for(i = 0; i < 9; i++) {
-        if((i > 0) && ((i % 3) == 0)) {
-            printf("---------------------\n");
-        }
-        for(j = 0; j < 9; j++) {
-            if((j > 0) && ((j % 3) == 0)) {
-                printf("| ");
-            }
-            printf("%d ", board[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
 int valid_board(int board[BOARD_SIZE][BOARD_SIZE]) {
     int i, j;
 
@@ -95,7 +77,7 @@ int valid_board(int board[BOARD_SIZE][BOARD_SIZE]) {
             TEST_ASSERT_FALSE(horizontal_duplicates(board, i, j));
             if(horizontal_duplicates(board, i, j)) {
                 printf("\nHorizontal line %d contains duplicates", i+1);
-                show_board(board);
+                show_board_terminal(board);
                 TEST_FAIL_MESSAGE("Horizontal duplicates found");
             }
             TEST_ASSERT_FALSE(vertical_duplicates(board, i, j));
@@ -139,7 +121,7 @@ int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
         }
     }
 
-    // show_board(board);
+    // show_board_terminal(board);
     return 0;
 }
 
