@@ -4,6 +4,9 @@
 
 // Generates a sudoku board, empty cells contains zero.
 void generate_board(int board[BOARD_SIZE][BOARD_SIZE]) {
+}
+
+int valid_cell(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
     return -1;
 }
 

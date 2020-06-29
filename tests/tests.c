@@ -125,6 +125,37 @@ int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
     return 0;
 }
 
+void test_valid_cell(void) {
+    int board[BOARD_SIZE][BOARD_SIZE];
+    int invalid_cell[3][2] = 
+        {5, 3,
+         4, 5,
+         2, 6};
+    char *invalid_board_names[3] =
+        {"../tests/testing_boards/invalid_s03a_1.txt",
+         "../tests/testing_boards/invalid_s03a_2.txt",
+         "../tests/testing_boards/invalid_s03a_3.txt"};
+    int i, j, valid, rc;
+
+    // Test with a correct completed board.
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+    for(i = 0; i < BOARD_SIZE; i++) {
+        for(j = 0; j < BOARD_SIZE; j++) {
+            TEST_ASSERT(valid_cell(board, i, j) == 0);
+        }
+    }
+
+    // Test with cells that break the rules.
+    for(i = 0; i < 3; i++) {
+        rc = read_board_file(board, invalid_board_names[i]);
+        TEST_ASSERT(rc == 0);
+
+        valid = valid_cell(board, invalid_cell[i][0], invalid_cell[i][1]);
+        TEST_ASSERT(valid == -1);
+    }
+}
+
 void test_solve_valid_board(void) {
     int board[BOARD_SIZE][BOARD_SIZE];
     int solution[BOARD_SIZE][BOARD_SIZE];
@@ -178,6 +209,7 @@ void test_solve_invalid_board(void) {
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_generate_board);
+    RUN_TEST(test_valid_cell);
     RUN_TEST(test_solve_valid_board);
     RUN_TEST(test_solve_invalid_board);
     return UNITY_END();
