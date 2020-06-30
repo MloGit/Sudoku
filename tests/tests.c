@@ -150,8 +150,7 @@ void test_solve_invalid_board(void) {
         TEST_ASSERT(rc == 0);
 
         rc = solve_board(board);
-        // TODO: This might need a specified error code: (rc == -1)
-        TEST_ASSERT(rc == -2);
+        TEST_ASSERT(rc == -1);
     }
 }
 
@@ -164,7 +163,7 @@ int main(void) {
     RUN_TEST(test_invalid_check_vertical_duplicates);
     RUN_TEST(test_invalid_check_box_duplicates);
     RUN_TEST(test_invalid_check_board);
-    // RUN_TEST(test_solve_valid_board);
-    // RUN_TEST(test_solve_invalid_board);
+    RUN_TEST(test_solve_valid_board);
+    RUN_TEST(test_solve_invalid_board);
     return UNITY_END();
 }

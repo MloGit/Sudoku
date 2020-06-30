@@ -15,8 +15,8 @@ int check_horizontal_duplicates(int board[LINE][LINE], int x, int y) {
             continue;
         }
         if(board[i_x][y] == board[x][y]) {
-    return -1;
-}
+            return -1;
+        }
     }
     return 0;
 }
@@ -90,4 +90,42 @@ int check_board(int board[LINE][LINE]) {
     }
     
     return 0;
+}
+
+int _solve_board(int board[LINE][LINE], int x, int y) {
+    int valid, rc, i;
+
+    if(x == LINE) {
+        x = 0;
+        y++;
+    }
+    if(y == LINE) {
+        return 0;
+    }
+
+    if(board[x][y] == 0) {
+        for(i = 1; i <= 9; i++) {
+            board[x][y] = i;
+            
+            if(check_cell(board, x, y) == 0) {
+                rc = _solve_board(board, x+1, y);
+                if(rc != -1) {
+                    return rc;
+                }
+            }
+        }
+        board[x][y] = 0;
+        return -1;
+    }
+    else {
+        return _solve_board(board, x+1, y);
+    }
+}
+
+/* Solves a given sudoku board */
+int solve_board(int board[LINE][LINE]) {
+    if(check_board(board) == -1) {
+        return -1;
+    }
+    return _solve_board(board, 0, 0);
 }
