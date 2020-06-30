@@ -11,96 +11,17 @@ void tearDown(void) {
     // clean stuff up here
 }
 
-/* Tests the horizontal line (y) of the cell (x, y) */
-int horizontal_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
-    int i;
-
-    for(i = 0; i < BOARD_SIZE; i++) {
-        if(board[i][y] == 0 || i == x) { /* Ignore zero and self */
-            i++;
-        }
-        if(board[i][y] == board[x][y]) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-/* Tests the vertical line (x) of the cell (x, y) */
-int vertical_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
-    int i;
-
-    for(i = 0; i < BOARD_SIZE; i++) {
-        if(board[x][i] == 0 || i == y) { /* Ignore zero and self */
-            i++;
-        }
-        if(board[x][i] == board[x][y]) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-/* Tests the 3x3 box which the cell (x, y) resides in */
-int box_duplicates(int board[BOARD_SIZE][BOARD_SIZE], int x, int y) {
-    int i, j;
-    int box_start;
-
-    box_start = (x / 3) * 3;
-
-    for(i = box_start; i < (box_start + 3); i++) {
-        for(j = box_start; j < (box_start + 3); j++) {
-            /* Ignore zero and self */
-            if((i == x && j == y) || board[i][j] == 0) {
-                j++;
-            }
-            if(board[i][j] == board[x][y]) {
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
-
-int valid_board(int board[BOARD_SIZE][BOARD_SIZE]) {
-    int i, j;
-
-    for(i = 0; i < 9; i++) {
-        for(j = 0; j < 9; j++) {
-            TEST_ASSERT_TRUE((board[i][j] >= 0) && (board[i][j] <= 9));
-        }
-    }
-
-
-    for(i = 0; i < 9; i++) {
-        for(j = 0; j < 9; j++) {
-            TEST_ASSERT_FALSE(horizontal_duplicates(board, i, j));
-            if(horizontal_duplicates(board, i, j)) {
-                printf("\nHorizontal line %d contains duplicates", i+1);
-                show_board_terminal(board);
-                TEST_FAIL_MESSAGE("Horizontal duplicates found");
-            }
-            TEST_ASSERT_FALSE(vertical_duplicates(board, i, j));
-            TEST_ASSERT_FALSE(box_duplicates(board, i, j));
-        }
-    }
-    return 1;
-}
-
 void test_generate_board(void) {
     // TODO: Are my test cases too complex?
     // Yes, they are.
-    int board[BOARD_SIZE][BOARD_SIZE];
+    int board[LINE][LINE];
 
     int board_sum = 5 * 9 * 9; // 5 * 9 equals the sum of 1 through 9
 
     generate_board(board);
-    // TODO: The generator function (or a sub function) should create a board where every cell has a value.
-    // This means that the sum of all the values is a constant (1*9 + 2*9 ...)
-    TEST_ASSERT_TRUE(valid_board(board));
 }
 
-int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
+int read_board_file(int board[LINE][LINE], char *file_name) {
     FILE *board_file;
     int x, y, rc;
 
@@ -110,9 +31,9 @@ int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
         return -1;
     }
 
-    for(y = 0; y < BOARD_SIZE; y++) {
-        for(x = 0; x < BOARD_SIZE; x++) {
-            rc = fscanf(board_file, "%d", &board[y][x]);
+    for(y = 0; y < LINE; y++) {
+        for(x = 0; x < LINE; x++) {
+            rc = fscanf(board_file, "%d", &board[x][y]);
             if(rc == 0) {
                 printf("File does not contain a full board\n");
                 return -1;
@@ -125,22 +46,52 @@ int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
 }
 
 void test_valid_check_cell(void) {
-    int board[BOARD_SIZE][BOARD_SIZE];
+    int board[LINE][LINE];
     int x, y, rc;
 
     rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
     TEST_ASSERT(rc == 0);
 
     // show_board_terminal(board);
-    for(y = 0; y < BOARD_SIZE; y++) {
-        for(x = 0; x < BOARD_SIZE; x++) {
+    for(y = 0; y < LINE; y++) {
+        for(x = 0; x < LINE; x++) {
             TEST_ASSERT(check_cell(board, x, y) == 0);
         }
     }
 }
 
+void test_invalid_check_horizontal_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/invalid_s03a_1.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_horizontal_duplicates(board, 5, 3) == -1);
+}
+
+void test_invalid_check_vertical_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/invalid_s03a_3.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_vertical_duplicates(board, 2, 6) == -1);
+}
+
+void test_invalid_check_box_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/invalid_s03a_2.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_box_duplicates(board, 4, 5) == -1);
+}
+
 void test_invalid_check_cell(void) {
-    int board[BOARD_SIZE][BOARD_SIZE];
+    int board[LINE][LINE];
     int invalid_cell[3][2] = 
         {5, 3,
          4, 5,
@@ -162,8 +113,8 @@ void test_invalid_check_cell(void) {
 }
 
 void test_solve_valid_board(void) {
-    int board[BOARD_SIZE][BOARD_SIZE];
-    int solution[BOARD_SIZE][BOARD_SIZE];
+    int board[LINE][LINE];
+    int solution[LINE][LINE];
     char *board_names[3] =
         {"../tests/testing_boards/s03a.txt",
          "../tests/testing_boards/s07a.txt",
@@ -184,7 +135,7 @@ void test_solve_valid_board(void) {
         rc = read_board_file(solution, solution_names[i]);
         TEST_ASSERT(rc == 0);
 
-        TEST_ASSERT_EQUAL_INT_ARRAY(solution, board, BOARD_SIZE*BOARD_SIZE);
+        TEST_ASSERT_EQUAL_INT_ARRAY(solution, board, LINE*LINE);
     }
 }
 
@@ -196,7 +147,7 @@ void test_solve_valid_board(void) {
  *   * 3*3 box duplicate
  */
 void test_solve_invalid_board(void) {
-    int board[BOARD_SIZE][BOARD_SIZE];
+    int board[LINE][LINE];
     char *board_names[3] =
         {"../tests/testing_boards/invalid_s03a_1.txt",
          "../tests/testing_boards/invalid_s03a_2.txt",
@@ -208,7 +159,8 @@ void test_solve_invalid_board(void) {
         TEST_ASSERT(rc == 0);
 
         rc = solve_board(board);
-        TEST_ASSERT(rc != 0);
+        // TODO: This might need a specified error code: (rc == -1)
+        TEST_ASSERT(rc == -2);
     }
 }
 
@@ -217,6 +169,9 @@ int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_generate_board);
     RUN_TEST(test_valid_check_cell);
+    RUN_TEST(test_invalid_check_horizontal_duplicates);
+    RUN_TEST(test_invalid_check_vertical_duplicates);
+    RUN_TEST(test_invalid_check_box_duplicates);
     RUN_TEST(test_invalid_check_cell);
     // RUN_TEST(test_solve_valid_board);
     // RUN_TEST(test_solve_invalid_board);

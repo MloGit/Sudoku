@@ -3,6 +3,6 @@
 
 #include "game_logic.h"
 
-void show_board_terminal(int board[BOARD_SIZE][BOARD_SIZE]);
+void show_board_terminal(int board[LINE][LINE]);
 
 #endif

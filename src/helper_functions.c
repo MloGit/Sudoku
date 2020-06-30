@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include "helper_functions.h"
 
-void show_board_terminal(int board[BOARD_SIZE][BOARD_SIZE]) {
-    int i, j;
+void show_board_terminal(int board[LINE][LINE]) {
+    int x, y;
 
     printf("\n");
-    for(i = 0; i < 9; i++) {
-        if((i > 0) && ((i % 3) == 0)) {
+    for(y = 0; y < LINE; y++) {
+        if((y > 0) && ((y % 3) == 0)) {
             printf("---------------------\n");
         }
-        for(j = 0; j < 9; j++) {
-            if((j > 0) && ((j % 3) == 0)) {
+        for(x = 0; x < LINE; x++) {
+            if((x > 0) && ((x % 3) == 0)) {
                 printf("| ");
             }
-            printf("%d ", board[i][j]);
+            printf("%d ", board[x][y]);
         }
         printf("\n");
     }
