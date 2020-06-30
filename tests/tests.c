@@ -102,18 +102,17 @@ void test_generate_board(void) {
 
 int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
     FILE *board_file;
-    int i, j, rc;
+    int x, y, rc;
 
     board_file = fopen(file_name, "r");
     if(board_file == NULL) {
         printf("ERROR: could not open file: %s\n", file_name);
         return -1;
     }
-    TEST_ASSERT_NOT_NULL_MESSAGE(board_file, "Error reading testing board");
 
-    for(i = 0; i < BOARD_SIZE; i++) {
-        for(j = 0; j < BOARD_SIZE; j++) {
-            rc = fscanf(board_file, "%d", &board[i][j]);
+    for(y = 0; y < BOARD_SIZE; y++) {
+        for(x = 0; x < BOARD_SIZE; x++) {
+            rc = fscanf(board_file, "%d", &board[y][x]);
             if(rc == 0) {
                 printf("File does not contain a full board\n");
                 return -1;
@@ -125,7 +124,22 @@ int read_board_file(int board[BOARD_SIZE][BOARD_SIZE], char *file_name) {
     return 0;
 }
 
-void test_valid_cell(void) {
+void test_valid_check_cell(void) {
+    int board[BOARD_SIZE][BOARD_SIZE];
+    int x, y, rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    // show_board_terminal(board);
+    for(y = 0; y < BOARD_SIZE; y++) {
+        for(x = 0; x < BOARD_SIZE; x++) {
+            TEST_ASSERT(check_cell(board, x, y) == 0);
+        }
+    }
+}
+
+void test_invalid_check_cell(void) {
     int board[BOARD_SIZE][BOARD_SIZE];
     int invalid_cell[3][2] = 
         {5, 3,
@@ -135,23 +149,14 @@ void test_valid_cell(void) {
         {"../tests/testing_boards/invalid_s03a_1.txt",
          "../tests/testing_boards/invalid_s03a_2.txt",
          "../tests/testing_boards/invalid_s03a_3.txt"};
-    int i, j, valid, rc;
+    int i, x, y, valid, rc;
 
-    // Test with a correct completed board.
-    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
-    TEST_ASSERT(rc == 0);
-    for(i = 0; i < BOARD_SIZE; i++) {
-        for(j = 0; j < BOARD_SIZE; j++) {
-            TEST_ASSERT(valid_cell(board, i, j) == 0);
-        }
-    }
-
-    // Test with cells that break the rules.
     for(i = 0; i < 3; i++) {
         rc = read_board_file(board, invalid_board_names[i]);
         TEST_ASSERT(rc == 0);
+        // show_board_terminal(board);
 
-        valid = valid_cell(board, invalid_cell[i][0], invalid_cell[i][1]);
+        valid = check_cell(board, invalid_cell[i][0], invalid_cell[i][1]);
         TEST_ASSERT(valid == -1);
     }
 }
@@ -183,11 +188,13 @@ void test_solve_valid_board(void) {
     }
 }
 
-// Tests solver against three invalid boards.
-// Each board has one of the following problems:
-//   * Horizontal duplicate
-//   * Vertical duplicate
-//   * 3*3 box duplicate
+/* 
+ * Tests solver against three invalid boards.
+ * Each board has one of the following problems:
+ *   * Horizontal duplicate
+ *   * Vertical duplicate
+ *   * 3*3 box duplicate
+ */
 void test_solve_invalid_board(void) {
     int board[BOARD_SIZE][BOARD_SIZE];
     char *board_names[3] =
@@ -209,8 +216,9 @@ void test_solve_invalid_board(void) {
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_generate_board);
-    RUN_TEST(test_valid_cell);
-    RUN_TEST(test_solve_valid_board);
-    RUN_TEST(test_solve_invalid_board);
+    RUN_TEST(test_valid_check_cell);
+    RUN_TEST(test_invalid_check_cell);
+    // RUN_TEST(test_solve_valid_board);
+    // RUN_TEST(test_solve_invalid_board);
     return UNITY_END();
 }
