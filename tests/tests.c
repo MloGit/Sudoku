@@ -45,19 +45,15 @@ int read_board_file(int board[LINE][LINE], char *file_name) {
     return 0;
 }
 
-void test_valid_check_cell(void) {
+void test_valid_check_board(void) {
     int board[LINE][LINE];
-    int x, y, rc;
+    int rc;
 
     rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
     TEST_ASSERT(rc == 0);
 
     // show_board_terminal(board);
-    for(y = 0; y < LINE; y++) {
-        for(x = 0; x < LINE; x++) {
-            TEST_ASSERT(check_cell(board, x, y) == 0);
-        }
-    }
+    TEST_ASSERT(check_board(board) == 0);
 }
 
 void test_invalid_check_horizontal_duplicates(void) {
@@ -90,25 +86,20 @@ void test_invalid_check_box_duplicates(void) {
     TEST_ASSERT(check_box_duplicates(board, 4, 5) == -1);
 }
 
-void test_invalid_check_cell(void) {
+void test_invalid_check_board(void) {
     int board[LINE][LINE];
-    int invalid_cell[3][2] = 
-        {5, 3,
-         4, 5,
-         2, 6};
     char *invalid_board_names[3] =
         {"../tests/testing_boards/invalid_s03a_1.txt",
          "../tests/testing_boards/invalid_s03a_2.txt",
          "../tests/testing_boards/invalid_s03a_3.txt"};
-    int i, x, y, valid, rc;
+    int i, rc;
 
     for(i = 0; i < 3; i++) {
         rc = read_board_file(board, invalid_board_names[i]);
         TEST_ASSERT(rc == 0);
         // show_board_terminal(board);
 
-        valid = check_cell(board, invalid_cell[i][0], invalid_cell[i][1]);
-        TEST_ASSERT(valid == -1);
+        TEST_ASSERT(check_board(board) == -1);
     }
 }
 
@@ -168,11 +159,11 @@ void test_solve_invalid_board(void) {
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_generate_board);
-    RUN_TEST(test_valid_check_cell);
+    RUN_TEST(test_valid_check_board);
     RUN_TEST(test_invalid_check_horizontal_duplicates);
     RUN_TEST(test_invalid_check_vertical_duplicates);
     RUN_TEST(test_invalid_check_box_duplicates);
-    RUN_TEST(test_invalid_check_cell);
+    RUN_TEST(test_invalid_check_board);
     // RUN_TEST(test_solve_valid_board);
     // RUN_TEST(test_solve_invalid_board);
     return UNITY_END();

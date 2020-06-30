@@ -69,8 +69,25 @@ int check_cell(int board[LINE][LINE], int x, int y) {
     }
     if(check_box_duplicates(board, x, y) == -1) {
         // printf("3*3 box rule broken with cell: (%d, %d)\n", x+1, y+1);
-    return -1;
+        return -1;
+    }
+
+    return 0;
 }
 
+int check_board(int board[LINE][LINE]) {
+    int x, y;
+
+    for(y = 0; y < LINE; y++) {
+        for(x = 0; x < LINE; x++) {
+            if(board[x][y] == 0) {
+                continue;
+            }
+            if(check_cell(board, x, y) == -1) {
+                return -1;
+            }
+        }
+    }
+    
     return 0;
 }
