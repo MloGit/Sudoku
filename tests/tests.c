@@ -11,16 +11,6 @@ void tearDown(void) {
     // clean stuff up here
 }
 
-void test_generate_board(void) {
-    // TODO: Are my test cases too complex?
-    // Yes, they are.
-    int board[LINE][LINE];
-
-    int board_sum = 5 * 9 * 9; // 5 * 9 equals the sum of 1 through 9
-
-    generate_board(board);
-}
-
 int read_board_file(int board[LINE][LINE], char *file_name) {
     FILE *board_file;
     int x, y, rc;
@@ -154,10 +144,17 @@ void test_solve_invalid_board(void) {
     }
 }
 
+void test_generate_board(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    generate_board(board);
+    rc = solve_board(board);
+    TEST_ASSERT_MESSAGE(rc == 0, "Could not solve generated board");
+}
 
 int main(void) {
     UNITY_BEGIN();
-    // RUN_TEST(test_generate_board);
     RUN_TEST(test_valid_check_board);
     RUN_TEST(test_invalid_check_horizontal_duplicates);
     RUN_TEST(test_invalid_check_vertical_duplicates);
@@ -165,5 +162,6 @@ int main(void) {
     RUN_TEST(test_invalid_check_board);
     RUN_TEST(test_solve_valid_board);
     RUN_TEST(test_solve_invalid_board);
+    RUN_TEST(test_generate_board);
     return UNITY_END();
 }
