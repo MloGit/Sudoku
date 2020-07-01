@@ -144,6 +144,22 @@ void test_solve_invalid_board(void) {
     }
 }
 
+void test_valid_unique_solution(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(unique_solution(board) == 0);
+}
+
+void test_invalid_unique_solution(void) {
+    int board[LINE][LINE] = {0};
+
+    TEST_ASSERT(unique_solution(board) == -1);
+}
+
 void test_solvable_generate_board(void) {
     int board[LINE][LINE];
     int rc;
