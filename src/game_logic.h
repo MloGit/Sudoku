@@ -9,6 +9,7 @@ int check_vertical_duplicates(int board[LINE][LINE], int x, int y);
 int check_box_duplicates(int board[LINE][LINE], int x, int y);
 int check_cell(int board[LINE][LINE], int x, int y);
 int check_board(int board[LINE][LINE]);
+int solve_board(int board[LINE][LINE], int backwards);
 int unique_solution(int board[LINE][LINE]);
 
 #endif

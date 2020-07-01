@@ -110,7 +110,7 @@ void test_solve_valid_board(void) {
         rc = read_board_file(board, board_names[i]);
         TEST_ASSERT(rc == 0);
 
-        rc = solve_board(board);
+        rc = solve_board(board, 0);
         TEST_ASSERT(rc == 0);
 
         rc = read_board_file(solution, solution_names[i]);
@@ -139,7 +139,7 @@ void test_solve_invalid_board(void) {
         rc = read_board_file(board, board_names[i]);
         TEST_ASSERT(rc == 0);
 
-        rc = solve_board(board);
+        rc = solve_board(board, 0);
         TEST_ASSERT(rc == -1);
     }
 }
@@ -165,7 +165,7 @@ void test_solvable_generate_board(void) {
     int rc;
 
     generate_board(board);
-    rc = solve_board(board);
+    rc = solve_board(board, 0);
     TEST_ASSERT_MESSAGE(rc == 0, "Could not solve generated board");
 }
 
@@ -204,6 +204,8 @@ int main(void) {
     RUN_TEST(test_invalid_check_board);
     RUN_TEST(test_solve_valid_board);
     RUN_TEST(test_solve_invalid_board);
+    RUN_TEST(test_valid_unique_solution);
+    RUN_TEST(test_invalid_unique_solution);
     RUN_TEST(test_solvable_generate_board);
     RUN_TEST(test_unique_generate_board);
     return UNITY_END();

@@ -1,8 +1,35 @@
 #include <stdio.h>
+#include <string.h>
 #include "game_logic.h"
 #include "helper_functions.h"
 
-/* Generates a sudoku board, empty cells contains zero. */
+/* Checks that a board has only one unique solution */
+int unique_solution(int board[LINE][LINE]) {
+    int copy[LINE][LINE], second_copy[LINE][LINE];
+    int x, y, rc;
+
+    memcpy(copy, board, sizeof(int) * LINE * LINE);
+    memcpy(second_copy, board, sizeof(int) * LINE * LINE);
+
+    rc = solve_board(copy, 0);
+    if(rc != 0) {
+        return rc;
+    }
+    rc = solve_board(second_copy, 1);
+    if(rc != 0) {
+        return rc;
+    }
+    
+    for(y = 0; y < LINE; y++) {
+        for(x = 0; x < LINE; x++) {
+            if(copy[x][y] != second_copy[x][y]) {
+                return -1;
+            }
+        }
+    }
+
+    return 0;
+}
 void generate_board(int board[LINE][LINE]) {
 }
 
@@ -92,7 +119,7 @@ int check_board(int board[LINE][LINE]) {
     return 0;
 }
 
-int _solve_board(int board[LINE][LINE], int x, int y) {
+int _solve_board(int board[LINE][LINE], int x, int y, int backwards) {
     int valid, rc, i;
 
     if(x == LINE) {
@@ -105,10 +132,15 @@ int _solve_board(int board[LINE][LINE], int x, int y) {
 
     if(board[x][y] == 0) {
         for(i = 1; i <= 9; i++) {
-            board[x][y] = i;
+            if(backwards) {
+                board[x][y] = 10-i;
+            }
+            else {
+                board[x][y] = i;
+            }
             
             if(check_cell(board, x, y) == 0) {
-                rc = _solve_board(board, x+1, y);
+                rc = _solve_board(board, x+1, y, backwards);
                 if(rc != -1) {
                     return rc;
                 }
@@ -118,14 +150,18 @@ int _solve_board(int board[LINE][LINE], int x, int y) {
         return -1;
     }
     else {
-        return _solve_board(board, x+1, y);
+        return _solve_board(board, x+1, y, backwards);
     }
 }
 
-/* Solves a given sudoku board */
-int solve_board(int board[LINE][LINE]) {
+/*
+ * Solves a given sudoku board
+ * 
+ * Backwards argument allows for checking that there is only one solution.
+ */
+int solve_board(int board[LINE][LINE], int backwards) {
     if(check_board(board) == -1) {
         return -1;
     }
-    return _solve_board(board, 0, 0);
+    return _solve_board(board, 0, 0, backwards);
 }
