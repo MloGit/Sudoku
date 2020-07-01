@@ -144,13 +144,39 @@ void test_solve_invalid_board(void) {
     }
 }
 
-void test_generate_board(void) {
+void test_solvable_generate_board(void) {
     int board[LINE][LINE];
     int rc;
 
     generate_board(board);
     rc = solve_board(board);
     TEST_ASSERT_MESSAGE(rc == 0, "Could not solve generated board");
+}
+
+/* 
+ * It is theretically possible for two identical boards to be generated, so it 
+ * loops through five generated boards, and fails the test only if all of them 
+ * are identical.
+ */
+void test_unique_generate_board(void) {
+    int board[LINE][LINE];
+    int different_board[LINE][LINE];
+    int i, x, y;
+
+    generate_board(board);
+
+    for(i = 0; i < 5; i++) {
+        generate_board(different_board);
+        for(y = 0; y < LINE; y++) {
+            for(x = 0; x < LINE; x++) {
+                if(board[x][y] != different_board[x][y]) {
+                    TEST_PASS();
+                }
+            }
+        }
+    }
+
+    TEST_FAIL_MESSAGE("Generated boards are not different");
 }
 
 int main(void) {
@@ -162,6 +188,7 @@ int main(void) {
     RUN_TEST(test_invalid_check_board);
     RUN_TEST(test_solve_valid_board);
     RUN_TEST(test_solve_invalid_board);
-    RUN_TEST(test_generate_board);
+    RUN_TEST(test_solvable_generate_board);
+    RUN_TEST(test_unique_generate_board);
     return UNITY_END();
 }
