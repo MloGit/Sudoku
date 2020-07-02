@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../Unity/src/unity.h"
-#include "../src/game_logic.h"
+#include "../src/solver.h"
+#include "../src/generator.h"
 #include "../src/helper_functions.h"
 
 void setUp(void) {
