@@ -195,6 +195,14 @@ void test_unique_generate_board(void) {
     TEST_FAIL_MESSAGE("Generated boards are not different");
 }
 
+void test_generate_board_unique_solution(void) {
+    int board[LINE][LINE];
+
+    generate_board(board);
+    TEST_ASSERT_MESSAGE(unique_solution(board) == 0,
+                        "Generated board has multiple solutions");
+}
+
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_valid_check_board);
