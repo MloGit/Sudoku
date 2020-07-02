@@ -4,7 +4,7 @@
 #include "../src/helper_functions.h"
 
 void setUp(void) {
-    // set stuff up here
+    init_generator();
 }
 
 void tearDown(void) {
@@ -195,6 +195,7 @@ void test_unique_generate_board(void) {
     TEST_FAIL_MESSAGE("Generated boards are not different");
 }
 
+/* Tests that a generated board has only one unique solution */
 void test_generate_board_unique_solution(void) {
     int board[LINE][LINE];
 

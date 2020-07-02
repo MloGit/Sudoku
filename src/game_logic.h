@@ -3,6 +3,7 @@
 
 #define LINE 9
 
+void init_generator();
 void generate_board(int board[LINE][LINE]);
 int check_horizontal_duplicates(int board[LINE][LINE], int x, int y);
 int check_vertical_duplicates(int board[LINE][LINE], int x, int y);
