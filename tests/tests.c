@@ -203,6 +203,21 @@ void test_generate_board_unique_solution(void) {
                         "Generated board has multiple solutions");
 }
 
+void test_generate_board_has_empty_cells(void) {
+    int board[LINE][LINE];
+    int x, y;
+
+    generate_board(board);
+    for(y = 0; y < LINE; y++) {
+        for(x = 0; x < LINE; x++) {
+            if(board[x][y] == 0) {
+                TEST_PASS();
+            }
+        }
+    }
+    TEST_FAIL_MESSAGE("Generated board has no empty cells");
+}
+
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_valid_check_board);
@@ -216,5 +231,7 @@ int main(void) {
     RUN_TEST(test_invalid_unique_solution);
     RUN_TEST(test_solvable_generate_board);
     RUN_TEST(test_unique_generate_board);
+    RUN_TEST(test_generate_board_unique_solution);
+    RUN_TEST(test_generate_board_has_empty_cells);
     return UNITY_END();
 }
