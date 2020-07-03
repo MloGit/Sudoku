@@ -12,17 +12,6 @@ void tearDown(void) {
     // clean stuff up here
 }
 
-void test_valid_check_board(void) {
-    int board[LINE][LINE];
-    int rc;
-
-    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
-    TEST_ASSERT(rc == 0);
-
-    // show_board_terminal(board);
-    TEST_ASSERT(check_board(board) == 0);
-}
-
 void test_invalid_check_horizontal_duplicates(void) {
     int board[LINE][LINE];
     int rc;
@@ -31,6 +20,16 @@ void test_invalid_check_horizontal_duplicates(void) {
     TEST_ASSERT(rc == 0);
 
     TEST_ASSERT(check_horizontal_duplicates(board, 5, 3) == -1);
+}
+
+void test_valid_check_horizontal_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_horizontal_duplicates(board, 5, 3) == 0);
 }
 
 void test_invalid_check_vertical_duplicates(void) {
@@ -43,6 +42,16 @@ void test_invalid_check_vertical_duplicates(void) {
     TEST_ASSERT(check_vertical_duplicates(board, 2, 6) == -1);
 }
 
+void test_valid_check_vertical_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_vertical_duplicates(board, 2, 6) == 0);
+}
+
 void test_invalid_check_box_duplicates(void) {
     int board[LINE][LINE];
     int rc;
@@ -51,6 +60,27 @@ void test_invalid_check_box_duplicates(void) {
     TEST_ASSERT(rc == 0);
 
     TEST_ASSERT(check_box_duplicates(board, 4, 5) == -1);
+}
+
+void test_valid_check_box_duplicates(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    TEST_ASSERT(check_box_duplicates(board, 4, 5) == 0);
+}
+
+void test_valid_check_board(void) {
+    int board[LINE][LINE];
+    int rc;
+
+    rc = read_board_file(board, "../tests/testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    // show_board_terminal(board);
+    TEST_ASSERT(check_board(board) == 0);
 }
 
 void test_invalid_check_board(void) {
@@ -198,10 +228,13 @@ void test_generate_board_has_empty_cells(void) {
 
 int main(void) {
     UNITY_BEGIN();
-    RUN_TEST(test_valid_check_board);
     RUN_TEST(test_invalid_check_horizontal_duplicates);
+    RUN_TEST(test_valid_check_horizontal_duplicates);
     RUN_TEST(test_invalid_check_vertical_duplicates);
+    RUN_TEST(test_valid_check_vertical_duplicates);
     RUN_TEST(test_invalid_check_box_duplicates);
+    RUN_TEST(test_valid_check_box_duplicates);
+    RUN_TEST(test_valid_check_board);
     RUN_TEST(test_invalid_check_board);
     RUN_TEST(test_solve_valid_board);
     RUN_TEST(test_solve_invalid_board);
