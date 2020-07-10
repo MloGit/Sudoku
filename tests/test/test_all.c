@@ -8,10 +8,6 @@ void setUp(void) {
     init_generator();
 }
 
-// void tearDown(void) {
-//     // clean stuff up here
-// }
-
 void test_invalid_check_horizontal_duplicates(void) {
     int board[LINE][LINE];
     int rc;
@@ -227,38 +223,3 @@ void test_generate_board_has_empty_cells(void) {
     }
     TEST_FAIL_MESSAGE("Generated board has no empty cells");
 }
-
-// int main(void) {
-//     UNITY_BEGIN();
-
-//     RUN_TEST(test_invalid_check_horizontal_duplicates);
-//     RUN_TEST(test_valid_check_horizontal_duplicates);
-//     RUN_TEST(test_invalid_check_vertical_duplicates);
-//     RUN_TEST(test_valid_check_vertical_duplicates);
-//     RUN_TEST(test_invalid_check_box_duplicates);
-//     RUN_TEST(test_valid_check_box_duplicates);
-
-//     // Level 1 dependencies
-
-//     RUN_TEST(test_valid_check_board);
-//     RUN_TEST(test_invalid_check_board);
-
-//     // Level 2 dependencies
-
-//     RUN_TEST(test_solve_valid_board);
-//     RUN_TEST(test_solve_invalid_board);
-
-//     // Level 3 dependencies
-
-//     RUN_TEST(test_valid_unique_solution);
-//     RUN_TEST(test_invalid_unique_solution);
-
-//     // Level 4 dependencies
-
-//     RUN_TEST(test_solvable_generate_board);
-//     RUN_TEST(test_unique_generate_board);
-//     RUN_TEST(test_generate_board_unique_solution);
-//     RUN_TEST(test_generate_board_has_empty_cells);
-
-//     return UNITY_END();
-// }
