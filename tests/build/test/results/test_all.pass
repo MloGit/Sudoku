@@ -1,0 +1,78 @@
+---
+:source:
+  :path: test
+  :file: test_all.c
+:successes:
+- :test: test_invalid_check_horizontal_duplicates
+  :line: 15
+  :message: ''
+  :unity_test_time: 0
+- :test: test_valid_check_horizontal_duplicates
+  :line: 25
+  :message: ''
+  :unity_test_time: 0
+- :test: test_invalid_check_vertical_duplicates
+  :line: 35
+  :message: ''
+  :unity_test_time: 0
+- :test: test_valid_check_vertical_duplicates
+  :line: 45
+  :message: ''
+  :unity_test_time: 0
+- :test: test_invalid_check_box_duplicates
+  :line: 55
+  :message: ''
+  :unity_test_time: 0
+- :test: test_valid_check_box_duplicates
+  :line: 65
+  :message: ''
+  :unity_test_time: 0
+- :test: test_valid_check_board
+  :line: 75
+  :message: ''
+  :unity_test_time: 0
+- :test: test_invalid_check_board
+  :line: 88
+  :message: ''
+  :unity_test_time: 0
+- :test: test_solve_valid_board
+  :line: 105
+  :message: ''
+  :unity_test_time: 0
+- :test: test_solve_invalid_board
+  :line: 139
+  :message: ''
+  :unity_test_time: 0
+- :test: test_valid_unique_solution
+  :line: 156
+  :message: ''
+  :unity_test_time: 0
+- :test: test_invalid_unique_solution
+  :line: 166
+  :message: ''
+  :unity_test_time: 0
+- :test: test_solvable_generate_board
+  :line: 172
+  :message: ''
+  :unity_test_time: 0
+- :test: test_unique_generate_board
+  :line: 186
+  :message: ''
+  :unity_test_time: 0
+- :test: test_generate_board_unique_solution
+  :line: 208
+  :message: ''
+  :unity_test_time: 0
+- :test: test_generate_board_has_empty_cells
+  :line: 216
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 16
+  :passed: 16
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.02547758600121597

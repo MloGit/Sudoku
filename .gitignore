@@ -3,6 +3,7 @@ cunit_test.c
 *.sh
 .vscode
 # /Unity
+# /CMock
 solutions
 sudokus
 

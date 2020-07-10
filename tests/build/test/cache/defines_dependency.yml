@@ -1,0 +1,7 @@
+---
+"../src/solver.c":
+- TEST
+"../src/generator.c":
+- TEST
+"../src/helper_functions.c":
+- TEST
