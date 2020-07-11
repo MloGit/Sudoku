@@ -57,6 +57,10 @@ int check_box_duplicates(int *board, int x, int y) {
 }
 
 int check_cell(int *board, int x, int y) {
+    if(board[board_index(x, y)] < 0 || board[board_index(x, y)] > 9) {
+        return -1;
+    }
+
     if(check_horizontal_duplicates(board, x, y) == -1) {
         // printf("Horizontal rule broken with cell: (%d, %d)\n", x+1, y+1);
         return -1;
