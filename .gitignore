@@ -4,6 +4,7 @@ cunit_test.c
 .vscode
 # /Unity
 # /CMock
+build/
 solutions
 sudokus
 
