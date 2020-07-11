@@ -3,6 +3,6 @@
 
 #include "config.h"
 
-int check_board(int board[LINE][LINE]);
+int check_board(int *board);
 
 #endif

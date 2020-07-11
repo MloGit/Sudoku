@@ -3,5 +3,5 @@
 
 #include "config.h"
 
-int unique_solution(int board[LINE][LINE]);
+int unique_solution(int *board);
 #endif

@@ -3,6 +3,6 @@
 
 #include "config.h"
 
-int solve_board(int board[LINE][LINE], int backwards);
+int solve_board(int *board, int backwards);
 
 #endif

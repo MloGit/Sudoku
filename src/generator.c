@@ -9,14 +9,14 @@
 void random_array(int *arr, int size);
 
 /* Generates a sudoku board, empty cells contains zero. */
-void generate_board(int board[LINE][LINE]) {
+void generate_board(int *board) {
     int y, x, i, j, empty_count, temp_cell;
     int box[3*3], box_index;
     
     // Initialize all cells to zero
     for(i = 0; i < LINE; i++) {
         for(j = 0; j < LINE; j++) {
-            board[j][i] = 0;
+            board[board_index(j, i)] = 0;
         }
     }
 
@@ -26,7 +26,7 @@ void generate_board(int board[LINE][LINE]) {
         box_index = 0;
         for(y = i; y < i+3; y++) {
             for(x = i; x < i+3; x++) {
-                board[x][y] = box[box_index];
+                board[board_index(x, y)] = box[box_index];
                 box_index++;
             }
         }
@@ -40,16 +40,16 @@ void generate_board(int board[LINE][LINE]) {
     while(empty_count < 45) {
         x = (rand() % 9);
         y = (rand() % 9);
-        if(board[x][y] == 0) {
+        if(board[board_index(x, y)] == 0) {
             continue;
         }
-        temp_cell = board[x][y];
-        board[x][y] = 0;
+        temp_cell = board[board_index(x, y)];
+        board[board_index(x, y)] = 0;
         if(unique_solution(board) == 0) {
             empty_count++;
         }
         else {
-            board[x][y] = temp_cell;
+            board[board_index(x, y)] = temp_cell;
         }
     }
     // show_board_terminal(board);

@@ -3,7 +3,7 @@
 
 #include "config.h"
 
-void generate_board(int board[LINE][LINE]);
+void generate_board(int *board);
 void init_generator();
 
 #endif

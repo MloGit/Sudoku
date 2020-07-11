@@ -1,24 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include "solver.h"
-#include "check_rules.h"
+#include "check_cell.h"
+#include "check_board.h"
 #include "helper_functions.h"
 
-int _solve_board(int board[LINE][LINE], int x, int y, int backwards);
+int _solve_board(int *board, int x, int y, int backwards);
 
 /*
  * Solves a given sudoku board
  * 
  * Backwards argument allows for checking that there is only one solution.
  */
-int solve_board(int board[LINE][LINE], int backwards) {
+int solve_board(int *board, int backwards) {
     if(check_board(board) == -1) {
         return -1;
     }
     return _solve_board(board, 0, 0, backwards);
 }
 
-int _solve_board(int board[LINE][LINE], int x, int y, int backwards) {
+int _solve_board(int *board, int x, int y, int backwards) {
     int valid, rc, i;
 
     if(x == LINE) {
@@ -29,13 +30,13 @@ int _solve_board(int board[LINE][LINE], int x, int y, int backwards) {
         return 0;
     }
 
-    if(board[x][y] == 0) {
+    if(board[board_index(x, y)] == 0) {
         for(i = 1; i <= 9; i++) {
             if(backwards) {
-                board[x][y] = 10-i;
+                board[board_index(x, y)] = 10-i;
             }
             else {
-                board[x][y] = i;
+                board[board_index(x, y)] = i;
             }
             
             if(check_cell(board, x, y) == 0) {
@@ -45,7 +46,7 @@ int _solve_board(int board[LINE][LINE], int x, int y, int backwards) {
                 }
             }
         }
-        board[x][y] = 0;
+        board[board_index(x, y)] = 0;
         return -1;
     }
     else {

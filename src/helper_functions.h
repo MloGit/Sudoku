@@ -3,7 +3,8 @@
 
 #include "config.h"
 
-void show_board_terminal(int board[LINE][LINE]);
-int read_board_file(int board[LINE][LINE], char *file_name);
+int board_index(int x, int y);
+void show_board_terminal(int *board);
+int read_board_file(int *board, char *file_name);
 
 #endif

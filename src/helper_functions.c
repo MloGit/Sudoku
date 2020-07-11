@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include "helper_functions.h"
 
+int board_index(int x, int y) {
+    return (y * LINE) + x;
+}
+
 /* Print board in terminal */
-void show_board_terminal(int board[LINE][LINE]) {
+void show_board_terminal(int *board) {
     int x, y;
 
     printf("\n");
@@ -14,7 +18,7 @@ void show_board_terminal(int board[LINE][LINE]) {
             if((x > 0) && ((x % 3) == 0)) {
                 printf("| ");
             }
-            printf("%d ", board[x][y]);
+            printf("%d ", board[board_index(x, y)]);
         }
         printf("\n");
     }
@@ -22,7 +26,7 @@ void show_board_terminal(int board[LINE][LINE]) {
 }
 
 /* Reads a given file into a board */
-int read_board_file(int board[LINE][LINE], char *file_name) {
+int read_board_file(int *board, char *file_name) {
     FILE *board_file;
     int x, y, rc;
 
@@ -34,7 +38,7 @@ int read_board_file(int board[LINE][LINE], char *file_name) {
 
     for(y = 0; y < LINE; y++) {
         for(x = 0; x < LINE; x++) {
-            rc = fscanf(board_file, "%d", &board[x][y]);
+            rc = fscanf(board_file, "%d", &board[board_index(x, y)]);
             if(rc == 0) {
                 printf("File does not contain a full board\n");
                 return -1;
