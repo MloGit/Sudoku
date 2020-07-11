@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include "unity.h"
+#include "check_board.h"
+#include "mock_check_cell.h"
+#include "helper_functions.h"
+
+void test_valid_check_board(void) {
+    int board[LINE * LINE] = {0};
+
+    check_cell_ExpectAndReturn(board, 0, 0, 0);
+    check_cell_ExpectAndReturn(board, 4, 4, 0);
+    check_cell_ExpectAndReturn(board, 8, 8, 0);
+
+    board[board_index(0, 0)] = 9;
+    board[board_index(4, 4)] = 5;
+    board[board_index(8, 8)] = 1;
+
+    check_cell_ExpectAndReturn(board, 0, 0, 0);
+    check_cell_ExpectAndReturn(board, 4, 4, 0);
+    check_cell_ExpectAndReturn(board, 8, 8, 0);
+
+    TEST_ASSERT(check_board(board) == 0);
+}
