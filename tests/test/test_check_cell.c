@@ -62,3 +62,17 @@ void test_valid_check_box_duplicates(void) {
 
     TEST_ASSERT(check_box_duplicates(board, 4, 5) == 0);
 }
+
+void test_invalid_values_check_cell(void) {
+    int board[LINE * LINE];
+    int rc;
+
+    rc = read_board_file(board, "../testing_boards/s03a_s.txt");
+    TEST_ASSERT(rc == 0);
+
+    board[board_index(6, 3)] = 15;
+    board[board_index(2, 7)] = -2;
+
+    TEST_ASSERT(check_cell(board, 6, 3) == -1);
+    TEST_ASSERT(check_cell(board, 2, 7) == -1);
+}
