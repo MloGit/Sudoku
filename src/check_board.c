@@ -3,6 +3,11 @@
 #include "check_cell.h"
 #include "helper_functions.h"
 
+/*
+ * Checks each cell in a given board.
+ * 
+ * Returns -1 on any rule breaks, otherwise 0.
+ */
 int check_board(int *board) {
     int x, y;
 
