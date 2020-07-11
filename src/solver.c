@@ -11,6 +11,7 @@ int _solve_board(int *board, int x, int y, int backwards);
  * Solves a given sudoku board
  * 
  * Backwards argument allows for checking that there is only one solution.
+ * Return -1 on invalid boards.
  */
 int solve_board(int *board, int backwards) {
     if(check_board(board) == -1) {
