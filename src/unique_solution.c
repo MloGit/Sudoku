@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "unique_solution.h"
+#include "compare_boards.h"
 #include "helper_functions.h"
 #include "solver.h"
 
@@ -21,12 +22,8 @@ int unique_solution(int *board) {
         return rc;
     }
     
-    for(y = 0; y < LINE; y++) {
-        for(x = 0; x < LINE; x++) {
-            if(copy[board_index(x, y)] != second_copy[board_index(x, y)]) {
-                return -1;
-            }
-        }
+    if(compare_boards(copy, second_copy) != 0) {
+        return -1;
     }
 
     return 0;
