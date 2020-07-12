@@ -9,7 +9,7 @@
 void random_array(int *arr, int size);
 
 /* Generates a sudoku board, empty cells contains zero. */
-void generate_board(int *board) {
+void generate_board(int *board, int num_empty) {
     int y, x, i, j, empty_count, temp_cell;
     int box[3*3], box_index;
     
@@ -37,7 +37,7 @@ void generate_board(int *board) {
     empty_count = 0;
     // TODO: Could this get stuck?
     // TODO: This would control difficulty a bit
-    while(empty_count < 45) {
+    while(empty_count < num_empty) {
         x = (rand() % 9);
         y = (rand() % 9);
         if(board[board_index(x, y)] == 0) {
