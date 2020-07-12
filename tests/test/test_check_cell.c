@@ -4,7 +4,7 @@
 #include "helper_functions.h"
 
 void test_invalid_check_horizontal_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/invalid_s03a_1.txt");
@@ -14,7 +14,7 @@ void test_invalid_check_horizontal_duplicates(void) {
 }
 
 void test_valid_check_horizontal_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/s03a_s.txt");
@@ -24,7 +24,7 @@ void test_valid_check_horizontal_duplicates(void) {
 }
 
 void test_invalid_check_vertical_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/invalid_s03a_3.txt");
@@ -34,7 +34,7 @@ void test_invalid_check_vertical_duplicates(void) {
 }
 
 void test_valid_check_vertical_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/s03a_s.txt");
@@ -44,7 +44,7 @@ void test_valid_check_vertical_duplicates(void) {
 }
 
 void test_invalid_check_box_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/invalid_s03a_2.txt");
@@ -54,7 +54,7 @@ void test_invalid_check_box_duplicates(void) {
 }
 
 void test_valid_check_box_duplicates(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/s03a_s.txt");
@@ -64,7 +64,7 @@ void test_valid_check_box_duplicates(void) {
 }
 
 void test_invalid_values_check_cell(void) {
-    int board[LINE * LINE];
+    int board[BOARD_SIZE];
     int rc;
 
     rc = read_board_file(board, "../testing_boards/s03a_s.txt");

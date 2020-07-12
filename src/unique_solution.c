@@ -7,11 +7,11 @@
 
 /* Checks that a board has only one unique solution */
 int unique_solution(int *board) {
-    int copy[LINE * LINE], second_copy[LINE * LINE];
+    int copy[BOARD_SIZE], second_copy[BOARD_SIZE];
     int x, y, rc;
 
-    memcpy(copy, board, sizeof(int) * LINE * LINE);
-    memcpy(second_copy, board, sizeof(int) * LINE * LINE);
+    memcpy(copy, board, sizeof(int) * BOARD_SIZE);
+    memcpy(second_copy, board, sizeof(int) * BOARD_SIZE);
 
     rc = solve_board(copy, 0);
     if(rc != 0) {

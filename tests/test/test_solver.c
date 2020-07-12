@@ -13,7 +13,7 @@
 #include "mock_check_board.h"
 
 void test_solve_valid_board(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
     int y, x;
 
     check_board_IgnoreAndReturn(0);

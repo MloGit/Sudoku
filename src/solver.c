@@ -47,6 +47,7 @@ int _solve_board(int *board, int x, int y, int backwards) {
                 }
             }
         }
+        // Starts backtracking here if no valid cell value is found.
         board[board_index(x, y)] = 0;
         return -1;
     }

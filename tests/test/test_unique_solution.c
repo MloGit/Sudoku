@@ -11,7 +11,7 @@
 #include "helper_functions.h"
 
 void test_valid_unique_solution(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
 
     solve_board_ExpectAndReturn(board, 0, 0);
     solve_board_ExpectAndReturn(board, 1, 0);
@@ -21,7 +21,7 @@ void test_valid_unique_solution(void) {
 }
 
 void test_invalid_solve_unique_solution(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
 
     solve_board_ExpectAndReturn(board, 0, -1);
 
@@ -34,7 +34,7 @@ void test_invalid_solve_unique_solution(void) {
 }
 
 void test_not_unique_solution(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
     
     solve_board_ExpectAndReturn(board, 0, 0);
     solve_board_ExpectAndReturn(board, 1, 0);

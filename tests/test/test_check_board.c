@@ -5,7 +5,7 @@
 #include "helper_functions.h"
 
 void test_valid_check_board(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
 
     check_cell_ExpectAndReturn(board, 0, 0, 0);
     check_cell_ExpectAndReturn(board, 4, 4, 0);
@@ -19,7 +19,7 @@ void test_valid_check_board(void) {
 }
 
 void test_invalid_check_board(void) {
-    int board[LINE * LINE] = {0};
+    int board[BOARD_SIZE] = {0};
 
     check_cell_ExpectAndReturn(board, 0, 0, -1);
     check_cell_ExpectAndReturn(board, 4, 4, -1);
