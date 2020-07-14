@@ -1,5 +1,4 @@
 /notes
-*.sh
 .vscode
 build/
 solutions
