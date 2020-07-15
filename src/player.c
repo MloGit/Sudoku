@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "player.h"
+#include "helper_functions.h"
 #include "config.h"
 #include "solver.h"
 #include "generator.h"
