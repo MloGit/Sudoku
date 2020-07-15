@@ -4,4 +4,6 @@
 #define LINE 9
 #define BOARD_SIZE LINE * LINE
 
+#define EMPTY_CELLS 45
+
 #endif
