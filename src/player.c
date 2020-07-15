@@ -20,6 +20,10 @@ int do_command(char *command, int *board, int *start_board) {
     if(strcmp(command, "new") == 0) {
         generate_board(board, EMPTY_CELLS);
         memcpy(start_board, board, sizeof(int) * BOARD_SIZE);
+        show_board_terminal(board);
+    }
+    else if(strcmp(command, "show") == 0 || strcmp(command, "s") == 0) {
+        show_board_terminal(board);
     }
     else if(strcmp(command, "check") == 0) {
         if(check_board(board) == 0) {
@@ -34,28 +38,29 @@ int do_command(char *command, int *board, int *start_board) {
         if(solve_board(board, 0) == -1) {
             printf("Board breaks rules\n");
         }
+        show_board_terminal(board);
     }
     else if(strcmp(command, "help") == 0) {
-        printf("\nThis game has the following commands:\n");
-        printf("new         generates new board\n");
-        printf("enter (e)   starts a number entering\n");
+        printf("\nThis game has the following commands:\n\n");
+        printf("new                          generates new board\n");
+        printf("enter (e)               starts a number entering\n");
+        printf("show (s)                 shows board in terminal\n");
         printf("check       checks if the board breaks any rules\n");
-        printf("solve       solves the board\n");
-        printf("quit (q)    quits the game\n");
+        printf("solve                           solves the board\n");
+        printf("quit (q)                          quits the game\n\n");
     }
     else if(strcmp(command, "enter") == 0 || strcmp(command, "e") == 0) {
         while(1) {
-            printf("Enter cell value in format 'value x y': ");
+            printf("Enter in format 'value x y': ");
             fgets(str, str_size, stdin);
             str[strcspn(str, "\n")] = '\0';
             if(str[0] == '\0') {
-                printf("\nempty\n");
                 break;
             }
             sscanf(str, "%d %d %d", &value, &x, &y);
 
-            if(value > 9 || value < 1 || x > 9 || x < 1 || y > 9 || y < 1) {
-                printf("Invalid input values, all must be in range 1-9\n");
+            if(value > 9 || value < 0 || x > 9 || x < 1 || y > 9 || y < 1) {
+                printf("Value 0-9  x 1-9  y 1-9\n");
             }
             else {
                 if(start_board[board_index(x-1, y-1)] == 0) {
@@ -67,6 +72,7 @@ int do_command(char *command, int *board, int *start_board) {
                 }
             }
         }
+        show_board_terminal(board);
     }
     else if(strcmp(command, "quit") == 0 || strcmp(command, "q") == 0) {
         return -1;
