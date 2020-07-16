@@ -9,7 +9,7 @@
 
 void random_array(int *arr, int size);
 
-/* Generates a sudoku board, empty cells contains zero. */
+/* Generates a sudoku board, empty cells contains zeros. */
 void generate_board(int *board, int num_empty) {
     int y, x, i, j, empty_count, temp_cell;
     int box[3*3], box_index;
@@ -21,7 +21,7 @@ void generate_board(int *board, int num_empty) {
         }
     }
 
-    // Set independent diagonal 3x3 boxes
+    // Set three independent diagonal 3x3 boxes
     for(i = 0; i < LINE; i += 3) {
         random_array(box, 3*3);
         box_index = 0;
@@ -37,7 +37,7 @@ void generate_board(int *board, int num_empty) {
     
     empty_count = 0;
     // TODO: Could this get stuck?
-    // TODO: This would control difficulty a bit
+    // TODO: This could control difficulty a bit
     while(empty_count < num_empty) {
         x = (rand() % 9);
         y = (rand() % 9);
@@ -53,7 +53,6 @@ void generate_board(int *board, int num_empty) {
             board[board_index(x, y)] = temp_cell;
         }
     }
-    // show_board_terminal(board);
 }
 
 void init_generator() {

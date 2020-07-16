@@ -14,7 +14,7 @@ int check_board(int *board) {
 
     for(y = 0; y < LINE; y++) {
         for(x = 0; x < LINE; x++) {
-            if(board[board_index(x, y)] == 0) {
+            if(board[board_index(x, y)] == 0) { // Ignore empty cells
                 continue;
             }
             if(check_cell(board, x, y) == -1) {

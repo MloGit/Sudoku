@@ -1,5 +1,5 @@
-#ifndef DUPLICATE_RULES_H
-#define DUPLICATE_RULES_H
+#ifndef CHECK_CELL_H
+#define CHECK_CELL_H
 
 int check_horizontal_duplicates(int *board, int x, int y);
 int check_vertical_duplicates(int *board, int x, int y);

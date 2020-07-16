@@ -11,10 +11,9 @@ int _solve_board(int *board, int x, int y, int backwards);
 /*
  * Solves a given sudoku board
  * 
- * Backwards argument allows for checking that there is only one solution.
- * It starts by filling cells with 9 and then decrements the test number,
- * instead of starting with 1 and incrementing.
+ * Implements a backtracking algorithm with a recursive _solve_board function.
  * 
+ * Backwards argument used elsewhere to check that solution is unique.
  * Returns -1 on invalid boards.
  */
 int solve_board(int *board, int backwards) {

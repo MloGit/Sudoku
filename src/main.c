@@ -6,18 +6,12 @@
 #include "common.h"
 
 void main() {
-    /*
-     * In loop:
-     * Get input
-     * Do command
-     */
-
     int board[BOARD_SIZE] = {0};
     int start_board[BOARD_SIZE] = {0};
-    char command[7];
+    char command[MAX_COMMAND_LEN];
     int run = 0;
 
-    init_generator();    
+    init_generator();
     do_command("new", board, start_board);
 
     printf("Sudoku game\n");

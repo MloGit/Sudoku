@@ -10,11 +10,10 @@
 /*
  * Handles the player commands in the game
  * 
- * Returns -1 if game should end.
+ * Returns -1 if game should end, otherwise 0.
  */
 int do_command(char *command, int *board, int *start_board) {
-    int str_size = 7;
-    char str[str_size];
+    char str[MAX_COMMAND_LEN];
     int value, x, y;
 
     if(strcmp(command, "new") == 0) {
@@ -52,7 +51,7 @@ int do_command(char *command, int *board, int *start_board) {
     else if(strcmp(command, "enter") == 0 || strcmp(command, "e") == 0) {
         while(1) {
             printf("Enter in format 'value x y': ");
-            fgets(str, str_size, stdin);
+            fgets(str, MAX_COMMAND_LEN, stdin);
             str[strcspn(str, "\n")] = '\0';
             if(str[0] == '\0') {
                 break;

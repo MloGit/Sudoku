@@ -8,7 +8,7 @@ int check_horizontal_duplicates(int *board, int x, int y) {
     int i_x;
 
     for(i_x = 0; i_x < LINE; i_x++) {
-        // Ignore zero and (x, y)
+        // Ignore empty cells and itself (x, y)
         if(board[board_index(i_x, y)] == 0 || i_x == x) {
             continue;
         }
@@ -24,7 +24,7 @@ int check_vertical_duplicates(int *board, int x, int y) {
     int i_y;
 
     for(i_y = 0; i_y < LINE; i_y++) {
-        // Ignore zero and (x, y)
+        // Ignore empty cells and itself (x, y)
         if(board[board_index(x, i_y)] == 0 || i_y == y) {
             continue;
         }
@@ -45,7 +45,7 @@ int check_box_duplicates(int *board, int x, int y) {
 
     for(i_y = box_start_y; i_y < (box_start_y + 3); i_y++) {
         for(i_x = box_start_x; i_x < (box_start_x + 3); i_x++) {
-            // Ignore zero and (x, y)
+            // Ignore empty cells and itself (x, y)
             if(board[board_index(i_x, i_y)] == 0 || (i_y == y && i_x == x)) {
                 continue;
             }
