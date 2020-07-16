@@ -20,7 +20,7 @@ void test_solvable_generate_board(void) {
 
     generate_board(board, 45);
     rc = solve_board(board, 0);
-    TEST_ASSERT_MESSAGE(rc == 0, "Could not solve generated board");
+    TEST_ASSERT(rc == 0);
 }
 
 void test_unique_generate_board(void) {
@@ -34,7 +34,6 @@ void test_unique_generate_board(void) {
     TEST_ASSERT(compare_boards(board_one, board_two) == -1);
 }
 
-/* Tests that a generated board has only one unique solution */
 void test_generate_board_unique_solution(void) {
     int board[BOARD_SIZE];
 

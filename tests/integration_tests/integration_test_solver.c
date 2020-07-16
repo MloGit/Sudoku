@@ -10,6 +10,7 @@ void setUp(void) {
 void tearDown(void) {
 }
 
+/* Tests solver against known valid boards, and their solutions. */
 void test_solve_valid_board(void) {
     int board[BOARD_SIZE];
     int solution[BOARD_SIZE];
