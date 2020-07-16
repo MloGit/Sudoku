@@ -1,9 +1,3 @@
-/*
- * Test of unique_solution()
- * 
- * The function should solve the given board normally and backwards and check
- * the resulting boards against eachother.
- */
 #include <stdio.h>
 #include "unique_solution.h"
 #include "config.h"

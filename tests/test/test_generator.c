@@ -21,6 +21,7 @@ void test_generate_board(void) {
     TEST_ASSERT_NOT_EMPTY(board);
 
     solve_board_ExpectAndReturn(board, 0, 0);
-    generate_board(board, LINE * 3); // Function fills, and empties 3 diagonal 3*3 boxes
+    // generate_board() fills, and empties, 3 diagonal 3*3 boxes
+    generate_board(board, LINE * 3);
     TEST_ASSERT_EMPTY(board);
 }

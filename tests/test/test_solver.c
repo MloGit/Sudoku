@@ -1,11 +1,10 @@
 /*
  * Unit tests for solver
  * 
- * Only needs a valid test, since check_board() asserts that board is solvable
+ * Only needs valid tests, since check_board() asserts that board is solvable
  * and that means the algorithm of solve_board() never has to deal with an
  * unsolvable board.
  */
-
 #include <stdio.h>
 #include "solver.h"
 #include "config.h"

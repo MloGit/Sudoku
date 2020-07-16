@@ -19,6 +19,10 @@ void test_valid_check_board(void) {
     TEST_ASSERT(check_board(board) == 0);
 }
 
+/*
+ * The values of the cells that are set in this test are meaningless, they just
+ * need to be non-zero to cause check_cell() to be called in check_board().
+ */
 void test_invalid_check_board(void) {
     int board[BOARD_SIZE] = {0};
 
