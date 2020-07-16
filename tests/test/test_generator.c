@@ -2,7 +2,7 @@
 #include "unity.h"
 #include "generator.h"
 #include "config.h"
-#include "helper_functions.h"
+#include "common.h"
 #include "mock_solver.h"
 #include "mock_unique_solution.h"
 

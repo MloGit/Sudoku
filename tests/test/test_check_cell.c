@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "unity.h"
 #include "check_cell.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 void test_invalid_check_horizontal_duplicates(void) {
     int board[BOARD_SIZE];

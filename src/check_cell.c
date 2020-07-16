@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "check_cell.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 /* Checks the horizontal line (y) of the cell (x, y) */
 int check_horizontal_duplicates(int *board, int x, int y) {
@@ -62,15 +63,12 @@ int check_cell(int *board, int x, int y) {
     }
 
     if(check_horizontal_duplicates(board, x, y) == -1) {
-        // printf("Horizontal rule broken with cell: (%d, %d)\n", x+1, y+1);
         return -1;
     }
     if(check_vertical_duplicates(board, x, y) == -1) {
-        // printf("Vertical rule broken with cell: (%d, %d)\n", x+1, y+1);
         return -1;
     }
     if(check_box_duplicates(board, x, y) == -1) {
-        // printf("3*3 box rule broken with cell: (%d, %d)\n", x+1, y+1);
         return -1;
     }
 

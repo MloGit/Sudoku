@@ -2,8 +2,9 @@
 #include <string.h>
 #include "unique_solution.h"
 #include "compare_boards.h"
-#include "helper_functions.h"
 #include "solver.h"
+#include "config.h"
+#include "common.h"
 
 /* Checks that a board has only one unique solution */
 int unique_solution(int *board) {

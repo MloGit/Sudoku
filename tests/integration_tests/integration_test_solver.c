@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "../vendor/ceedling/vendor/unity/src/unity.h"
 #include "../../src/solver.h"
-#include "../../src/helper_functions.h"
 #include "../../src/config.h"
+#include "../../src/common.h"
 
 void setUp(void) {
 }

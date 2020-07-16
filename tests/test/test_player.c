@@ -3,7 +3,7 @@
 #include "unity.h"
 #include "player.h"
 #include "config.h"
-#include "helper_functions.h"
+#include "common.h"
 #include "mock_generator.h"
 #include "mock_check_board.h"
 #include "mock_solver.h"

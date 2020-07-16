@@ -2,7 +2,8 @@
 #include "unity.h"
 #include "check_board.h"
 #include "mock_check_cell.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 void test_valid_check_board(void) {
     int board[BOARD_SIZE] = {0};

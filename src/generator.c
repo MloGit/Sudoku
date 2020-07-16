@@ -4,7 +4,8 @@
 #include "generator.h"
 #include "solver.h"
 #include "unique_solution.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 void random_array(int *arr, int size);
 

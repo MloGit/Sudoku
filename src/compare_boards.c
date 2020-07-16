@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "compare_boards.h"
 #include "config.h"
-#include "helper_functions.h"
+#include "common.h"
 
 /* Compare two boards. Returns 0 if they are equal, otherwise -1. */
 int compare_boards(int *board_one, int *board_two) {

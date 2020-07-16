@@ -2,7 +2,7 @@
 #include "unity.h"
 #include "compare_boards.h"
 #include "config.h"
-#include "helper_functions.h"
+#include "common.h"
 
 void test_compare_boards(void) {
     int board_one[BOARD_SIZE] = {0};

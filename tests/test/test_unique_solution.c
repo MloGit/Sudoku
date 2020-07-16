@@ -6,9 +6,10 @@
  */
 #include <stdio.h>
 #include "unique_solution.h"
+#include "config.h"
+#include "common.h"
 #include "mock_solver.h"
 #include "mock_compare_boards.h"
-#include "helper_functions.h"
 
 void test_valid_unique_solution(void) {
     int board[BOARD_SIZE] = {0};

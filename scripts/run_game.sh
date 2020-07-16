@@ -11,7 +11,7 @@ gcc -o main main.c \
     check_cell.c \
     check_board.c \
     compare_boards.c \
-    helper_functions.c \
+    common.c \
 
 ./main
 rm main

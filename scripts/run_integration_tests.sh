@@ -22,7 +22,7 @@ gcc -o integration_test_solver integration_test_solver.c \
     ../../src/solver.c \
     ../../src/check_board.c \
     ../../src/check_cell.c \
-    ../../src/helper_functions.c \
+    ../../src/common.c \
     ../vendor/ceedling/vendor/unity/src/unity.c
 
 ./integration_test_solver
@@ -36,7 +36,7 @@ gcc -o integration_test_unique_solution integration_test_unique_solution.c \
     ../../src/solver.c \
     ../../src/check_board.c \
     ../../src/check_cell.c \
-    ../../src/helper_functions.c \
+    ../../src/common.c \
     ../vendor/ceedling/vendor/unity/src/unity.c
 
 ./integration_test_unique_solution
@@ -51,7 +51,7 @@ gcc -o integration_test_generator integration_test_generator.c \
     ../../src/solver.c \
     ../../src/check_board.c \
     ../../src/check_cell.c \
-    ../../src/helper_functions.c \
+    ../../src/common.c \
     ../vendor/ceedling/vendor/unity/src/unity.c
 
 ./integration_test_generator

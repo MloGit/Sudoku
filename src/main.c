@@ -3,7 +3,7 @@
 #include "config.h"
 #include "player.h"
 #include "generator.h"
-#include "helper_functions.h"
+#include "common.h"
 
 void main() {
     /*

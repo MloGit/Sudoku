@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "check_board.h"
 #include "check_cell.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 /*
  * Checks each cell in a given board.

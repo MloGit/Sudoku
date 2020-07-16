@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "player.h"
-#include "helper_functions.h"
-#include "config.h"
 #include "generator.h"
 #include "solver.h"
 #include "check_board.h"
+#include "config.h"
+#include "common.h"
 
 /*
  * Handles the player commands in the game

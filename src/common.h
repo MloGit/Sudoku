@@ -1,5 +1,5 @@
-#ifndef HELPER_FUNCTIONS_H
-#define HELPER_FUNCTIONS_H
+#ifndef COMMON_H
+#define COMMON_H
 
 int board_index(int x, int y);
 void show_board_terminal(int *board);

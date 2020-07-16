@@ -3,7 +3,8 @@
 #include "solver.h"
 #include "check_cell.h"
 #include "check_board.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 
 int _solve_board(int *board, int x, int y, int backwards);
 

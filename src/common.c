@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "helper_functions.h"
+#include "common.h"
 #include "config.h"
 
 int board_index(int x, int y) {

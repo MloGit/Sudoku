@@ -8,7 +8,8 @@
 
 #include <stdio.h>
 #include "solver.h"
-#include "helper_functions.h"
+#include "config.h"
+#include "common.h"
 #include "mock_check_cell.h"
 #include "mock_check_board.h"
 
