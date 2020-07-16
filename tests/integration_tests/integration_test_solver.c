@@ -15,13 +15,13 @@ void test_solve_valid_board(void) {
     int board[BOARD_SIZE];
     int solution[BOARD_SIZE];
     char *board_names[3] =
-        {"../../testing_boards/s03a.txt",
-         "../../testing_boards/s07a.txt",
-         "../../testing_boards/s10a.txt"};
+        {"../testing_boards/s03a.txt",
+         "../testing_boards/s07a.txt",
+         "../testing_boards/s10a.txt"};
     char *solution_names[3] =
-        {"../../testing_boards/s03a_s.txt",
-         "../../testing_boards/s07a_s.txt",
-         "../../testing_boards/s10a_s.txt"};
+        {"../testing_boards/s03a_s.txt",
+         "../testing_boards/s07a_s.txt",
+         "../testing_boards/s10a_s.txt"};
     int i, rc;
 
     for(i = 0; i < 3; i++) {
@@ -48,9 +48,9 @@ void test_solve_valid_board(void) {
 void test_solve_invalid_board(void) {
     int board[BOARD_SIZE];
     char *board_names[3] =
-        {"../../testing_boards/invalid_s03a_1.txt",
-         "../../testing_boards/invalid_s03a_2.txt",
-         "../../testing_boards/invalid_s03a_3.txt"};
+        {"../testing_boards/invalid_s03a_1.txt",
+         "../testing_boards/invalid_s03a_2.txt",
+         "../testing_boards/invalid_s03a_3.txt"};
     int i, rc;
 
     for(i = 0; i < 3; i++) {

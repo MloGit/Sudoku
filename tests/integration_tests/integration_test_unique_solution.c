@@ -14,7 +14,7 @@ void test_valid_unique_solution(void) {
     int board[BOARD_SIZE];
     int rc;
 
-    rc = read_board_file(board, "../../testing_boards/s03a.txt");
+    rc = read_board_file(board, "../testing_boards/s03a.txt");
     TEST_ASSERT(rc == 0);
 
     TEST_ASSERT(unique_solution(board) == 0);
